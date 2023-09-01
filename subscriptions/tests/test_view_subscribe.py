@@ -17,13 +17,7 @@ class SubscribeGet(TestCase):
     
     def test_html(self):
         """HTML must contain 5 input tags"""
-        tags = (("<form", 1), ("<input", 6),
-                ("type='text'", 3), ("type='email'", 1), ("type='submit'", 1))
-        self.assertContains(self.response, "<form")
-        self.assertContains(self.response, "<input", 6)
-        self.assertContains(self.response, 'type="text"', 3)
-        self.assertContains(self.response, 'type="email"')
-        self.assertContains(self.response, 'type="submit"')
+        tags = (("<form", 1), ("<input", 6), ("type='text'", 3), ("type='email'", 1), ("type='submit'", 1))
         for text,count in tags:
             with self.subTest():
                 self.assertContains(self.response, text, count)
@@ -40,10 +34,10 @@ class SubscribeGet(TestCase):
 
 class SubscribePostValid(TestCase):
     def setUp(self):
-        data = dict(name="Clebo",
-                    cpf="12345678901",
-                    email="enzoyhsu@gmail.com",
-                    phone="53-91234-5678")
+        data = dict(name='Cleber FOnseca',
+                    cpf='12345678901',
+                    email='profcleberfonseca@gmail.com',
+                    phone='53-1234-5678')
         self.response = self.client.post('/inscricao/', data)
 
     def test_post(self):
@@ -68,7 +62,7 @@ class SubscribePostInvalid(TestCase):
         form = self.response.context['form']
         self.assertTrue(form.errors)
 
-class SubscribeSuccesMessage(TestCase):
+class SubscribeSuccessMessage(TestCase):
     def test_message(self):
         data = dict(name = 'Cleber FOnseca',
                 cpf = '12345678901',

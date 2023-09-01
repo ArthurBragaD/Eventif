@@ -1,10 +1,10 @@
 from django.test import TestCase
-from django.test import mail
+from django.core import mail
 
 class SubscribeMailTest(TestCase):
     def setUp(self):
-        data = dict(name="Clebo",
-                    cpf="12345678901",
+        data = dict(name="Cleber Fonseca",
+                    cpf="134567890",
                     email="enzoyhsu@gmail.com",
                     phone="53-91234-5678")
         self.response = self.client.post('/inscricao/', data)

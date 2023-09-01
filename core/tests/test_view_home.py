@@ -39,10 +39,10 @@ class SubscribeTest(TestCase):
 
 class SubscribeTestPost(TestCase):
     def setUp(self):
-        data = dict(name="Clebo",
-                    cpf="12345678901",
-                    email="enzoyhsu@gmail.com",
-                    phone="53-91234-5678")
+        data = dict(name='Cleber FOnseca',
+                    cpf='12345678901',
+                    email='profcleberfonseca@gmail.com',
+                    phone='53-1234-5678')
         self.response = self.client.post('/inscricao/', data)
 
     def test_post(self):
@@ -63,15 +63,15 @@ class SubscribeTestPost(TestCase):
 
     def test_subscription_email_to(self):
         email = mail.outbox[0]
-        expect = ['contato@eventif.com.br', 'enzoyhsu@gmail.com']
+        expect = ['contato@eventif.com.br', 'profcleberfonseca@gmail.com']
         self.assertEqual(expect, email.to)
 
     def test_subscription_email_body(self):
         email = mail.outbox[0]
-        self.assertIn('Clebo', email.body)
+        self.assertIn('Cleber FOnseca', email.body)
         self.assertIn('12345678901', email.body)
-        self.assertIn('enzoyhsu@gmail.com', email.body)
-        self.assertIn('53-91234-5678', email.body)
+        self.assertIn('profcleberfonseca@gmail.com', email.body)
+        self.assertIn('53-1234-5678', email.body)
 
 class SubscribeInvalidPost(TestCase):
     def setUp(self):
@@ -89,7 +89,7 @@ class SubscribeInvalidPost(TestCase):
         form = self.response.context['form']
         self.assertTrue(form.errors)
 
-class SubscribeSuccesMessage(TestCase):
+class SubscribeSuccessMessage(TestCase):
     def test_message(self):
         data = dict(name = 'Cleber FOnseca',
                 cpf = '12345678901',
