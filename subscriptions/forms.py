@@ -1,4 +1,5 @@
-from django import forms 
+from django import forms
+
 
 class SubscriptionForm(forms.Form):
     name = forms.CharField(label="Nome")

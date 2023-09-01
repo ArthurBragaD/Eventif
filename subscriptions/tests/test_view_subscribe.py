@@ -1,6 +1,8 @@
-from django.test import TestCase
-from subscriptions.forms import SubscriptionForm
 from django.core import mail
+from django.test import TestCase
+
+from subscriptions.forms import SubscriptionForm
+
 
 class SubscribeGet(TestCase):
     def setUp(self):
@@ -13,12 +15,17 @@ class SubscribeGet(TestCase):
 
     def test_template(self):
         """Must use subscriptions/subscription_fotm.html"""
-        self.assertTemplateUsed(self.response, 'subscriptions/subscription_form.html')
-    
+        self.assertTemplateUsed(
+            self.response, 'subscriptions/subscription_form.html')
+
     def test_html(self):
         """HTML must contain 5 input tags"""
-        tags = (("<form", 1), ("<input", 6), ("type='text'", 3), ("type='email'", 1), ("type='submit'", 1))
-        for text,count in tags:
+        tags = (('<form', 1),
+                ('<input', 6),
+                ('type="text"', 3),
+                ('type="email"', 1),
+                ('type="submit"', 1))
+        for text, count in tags:
             with self.subTest():
                 self.assertContains(self.response, text, count)
 
@@ -34,10 +41,10 @@ class SubscribeGet(TestCase):
 
 class SubscribePostValid(TestCase):
     def setUp(self):
-        data = dict(name='Cleber FOnseca',
-                    cpf='12345678901',
-                    email='profcleberfonseca@gmail.com',
-                    phone='53-1234-5678')
+        data = dict(name="Sofia e Dego",
+                    cpf="12345678901",
+                    email="diego.avila@aluno.riogrande.ifrs.edu.br",
+                    phone="53-99101-1002")
         self.response = self.client.post('/inscricao/', data)
 
     def test_post(self):
@@ -46,13 +53,17 @@ class SubscribePostValid(TestCase):
     def test_send_subscribe_email(self):
         self.assertEqual(1, len(mail.outbox))
 
+
 class SubscribePostInvalid(TestCase):
     def setUp(self):
         self.response = self.client.post('/inscricao/', {})
+
     def test_post(self):
         self.assertEqual(200, self.response.status_code)
+
     def test_template(self):
-        self.assertTemplateUsed(self.response, 'subscriptions/subscription_form.html')
+        self.assertTemplateUsed(
+            self.response, 'subscriptions/subscription_form.html')
 
     def test_has_form(self):
         form = self.response.context['form']
@@ -62,11 +73,10 @@ class SubscribePostInvalid(TestCase):
         form = self.response.context['form']
         self.assertTrue(form.errors)
 
+
 class SubscribeSuccessMessage(TestCase):
     def test_message(self):
-        data = dict(name = 'Cleber FOnseca',
-                cpf = '12345678901',
-                email='profcleberfonseca@gmail.com',
-                phone = '53-1234-5678')
+        data = dict(name="Sofia e Dego", cpf="12345678901",
+                    email="diego.avila@aluno.riogrande.ifrs.edu.br", phone="53-99101-1002")
         response = self.client.post('/inscricao/', data, follow=True)
         self.assertContains(response, 'Inscrição realizada com sucesso!')

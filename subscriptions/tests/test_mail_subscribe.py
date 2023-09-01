@@ -1,12 +1,13 @@
-from django.test import TestCase
 from django.core import mail
+from django.test import TestCase
 
-class SubscribeMailTest(TestCase):
+
+class MailTest(TestCase):
     def setUp(self):
-        data = dict(name="Cleber Fonseca",
-                    cpf="134567890",
-                    email="enzoyhsu@gmail.com",
-                    phone="53-91234-5678")
+        data = dict(name="Sofia e Dego",
+                    cpf="12345678901",
+                    email="diego.avila@aluno.riogrande.ifrs.edu.br",
+                    phone="53-99101-1002")
         self.response = self.client.post('/inscricao/', data)
         self.email = mail.outbox[0]
 
@@ -19,10 +20,15 @@ class SubscribeMailTest(TestCase):
         self.assertEqual(expect, self.email.from_email)
 
     def test_subscription_email_to(self):
-        expect = ['contato@eventif.com.br', 'enzoyhsu@gmail.com']
+        expect = ['contato@eventif.com.br',
+                  'diego.avila@aluno.riogrande.ifrs.edu.br']
         self.assertEqual(expect, self.email.to)
 
-    def test_subscription_email_body(self):
-        contents = {'Cleber Fonseca', '134567890','enzoyhsu@gmail.com', '53-91234-5678'}
+    def test_subscription_body(self):
+        contents = ['Sofia e Dego',
+                    '12345678901',
+                    'diego.avila@aluno.riogrande.ifrs.edu.br',
+                    '53-99101-1002']
         for content in contents:
-            self.assertIn(content, self.email.body)
+            with self.subTest():
+                self.assertIn(content, self.email.body)
