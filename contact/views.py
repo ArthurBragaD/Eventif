@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
 def contato(request):
-    return render(request, 'contato/contact_form.html')
+    return render(request, 'contact/contact_form.html')

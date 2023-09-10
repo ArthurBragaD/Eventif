@@ -24,5 +24,5 @@ urlpatterns = [
     path('', home),
     path('inscricao/', subscribe),
     path('admin/', admin.site.urls),
-    path('contatoView/', contato)
+    path('contatoView/', contato),
 ]
