@@ -6,4 +6,3 @@ class contatoForm(forms.Form):
     email = forms.EmailField(label='Email')
     phone = forms.CharField(label='Telefone', empty_value='Não informado')
     message = forms.CharField(label='Mensagem',widget=forms.Textarea)
-    # phone.empty_label="Nothing"

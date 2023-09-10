@@ -13,19 +13,19 @@ class contactGet(TestCase):
         """Must use contact/contact_form.html"""
         self.assertTemplateUsed(self.response, 'contact/contact_form.html')
 
-    # def test_html(self):
-    #     """HTML must contain input tags"""
-    #     tags = (
-    #         ('<form', 1), 
-    #         ('<input', 6), 
-    #         ('type="text"', 2), 
-    #         ('type="email"', 1), 
-    #         ('type="textarea"', 1),
-    #         ('type="submit"', 1)
-    #     )
-    #     for text, count in tags:
-    #         with self.subTest():
-    #             self.assertContains(self.response, text, count)
+    def test_html(self):
+        """HTML must contain input tags"""
+        tags = (
+            ('<form', 1), 
+            ('<input', 5), 
+            ('type="text"', 2), 
+            ('type="email"', 1), 
+            ('<textarea', 1),
+            ('type="submit"', 1)
+        )
+        for text, count in tags:
+            with self.subTest():
+                self.assertContains(self.response, text, count)
 
     def test_csrf(self):
         """HTML form must contain CSRF"""
