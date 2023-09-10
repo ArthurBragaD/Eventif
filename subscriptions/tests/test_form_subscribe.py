@@ -3,7 +3,7 @@ from subscriptions.forms import SubscriptionForm
 
 class SubscriptionFormTest(TestCase):
     def setUp(self):
-        self.form = SubscriptionForm();
+        self.form = SubscriptionForm()
 
     def test_form_has_fields(self):
         self.assertSequenceEqual(['name', 'cpf', 'email', 'phone'], list(self.form.fields))

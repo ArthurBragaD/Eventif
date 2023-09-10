@@ -1,5 +1,5 @@
 from django.test import TestCase
-
+from contact.forms import contatoForm
 
 class contactGet(TestCase):
     def setUp(self):
@@ -13,15 +13,24 @@ class contactGet(TestCase):
         """Must use contact/contact_form.html"""
         self.assertTemplateUsed(self.response, 'contact/contact_form.html')
 
-    # def test_html(self):
-    #     """HTML must contain input tags"""
-    #     tags = (
-    #         ('<form', 1), 
-    #         ('<input', 6), 
-    #         ('type="text"', 3), 
-    #         ('type="email"', 1), 
-    #         ('type="submit"', 1)
-    #     )
-    #     for text, count in tags:
-    #         with self.subTest():
-    #             self.assertContains(self.response, text, count)
+    def test_html(self):
+        """HTML must contain input tags"""
+        tags = (
+            ('<form', 1), 
+            ('<input', 6), 
+            ('type="text"', 3), 
+            ('type="email"', 1), 
+            ('type="submit"', 1)
+        )
+        for text, count in tags:
+            with self.subTest():
+                self.assertContains(self.response, text, count)
+
+    def test_csrf(self):
+        """HTML form must contain CSRF"""
+        self.assertContains(self.response, "csrfmiddlewaretoken")
+
+    def test_has_form(self):
+        """Context must have contatoForm"""
+        form = self.response.context['form']
+        self.assertIsInstance(form, contatoForm)
