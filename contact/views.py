@@ -14,10 +14,7 @@ def contato(request):
     else:
         # Pega os dados do form
         form = contatoForm(request.POST)
-        # Se telefone vazio define como não informado
-        # if (form.phone == ""):
-        #     form.phone = "Não informado"
-
+        
         # Teste se é valido 
         if not form.is_valid():
             # Retorna a pág contatoView
