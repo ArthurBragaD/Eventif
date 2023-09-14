@@ -17,7 +17,7 @@ def contato(request):
         
         # Teste se é valido 
         if not form.is_valid():
-            # Retorna a pág contatoView
+            # Retorna a pág contatoView com os erros
             return render(request, 'contact/contact_form.html', {'form': form})
 
         # Informações do email

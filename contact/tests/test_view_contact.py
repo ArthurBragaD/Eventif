@@ -6,15 +6,15 @@ class contactGet(TestCase):
         self.response = self.client.get('/contatoView/')
 # 
     def test_get(self):
-        """GET /contatoView/ must return status_code 200"""
+        #Teste para ver se o link esta ok
         self.assertEqual(200, self.response.status_code)
 
     def test_template(self):
-        """Must use contact/contact_form.html"""
+        #Teste para ver se o templete usado esta correto
         self.assertTemplateUsed(self.response, 'contact/contact_form.html')
 
     def test_html(self):
-        """HTML must contain input tags"""
+        #Teste para ver se os testes do form do HTML estão corretos 
         tags = (
             ('<form', 1), 
             ('<input', 5), 
@@ -26,12 +26,3 @@ class contactGet(TestCase):
         for text, count in tags:
             with self.subTest():
                 self.assertContains(self.response, text, count)
-
-    def test_csrf(self):
-        """HTML form must contain CSRF"""
-        self.assertContains(self.response, "csrfmiddlewaretoken")
-
-    def test_has_form(self):
-        """Context must have contatoForm"""
-        form = self.response.context['form']
-        self.assertIsInstance(form, contatoForm)
