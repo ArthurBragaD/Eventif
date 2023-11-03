@@ -20,3 +20,5 @@ pip install -r requirements.txt
 cp contrib/env-sample .env
 python manage.py test
 ```
+
+Teste
