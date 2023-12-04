@@ -19,10 +19,14 @@ class ContactModelAdmin(admin.ModelAdmin):
     actions = ["responder"]
 
     def responder(self, request, queryset):
-        resposta = "Mensagem foi marcada como respondida"
         for contact in queryset:
+            resposta = "Mensagem foi marcada como respondida"
             nome = contact.name
             emailEnvia = settings.DEFAULT_FROM_EMAIL
+            # if (contact.phone == ""):
+            #     telefone = "Não informado"
+            # else:
+            telefone = contact.phone
             emailRecebe = [contact.email , settings.DEFAULT_FROM_EMAIL]
             corpoDoEmail = render_to_string('contact/contact_response.txt', {'contact': contact})
             mail.send_mail(
@@ -31,6 +35,7 @@ class ContactModelAdmin(admin.ModelAdmin):
                 emailEnvia,
                 emailRecebe,
                 resposta,
+                telefone,
             )
             queryset.update(response=True)
         self.message_user(request, f'{queryset.count()} contato(s) foi(ram) respondido(s) com sucesso.')
