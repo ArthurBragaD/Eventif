@@ -38,7 +38,8 @@ class ContactModelAdmin(admin.ModelAdmin):
                 resposta
             )
         self.message_user(request, f'{queryset.count()} contato(s) foi(ram) respondido(s) com sucesso.')
-
+        return HttpResponseRedirect('/admin/contact/contact/')
     responder.short_description = 'Enviar resposta para contatos selecionados'
+
 
 admin.site.register(Contact, ContactModelAdmin)
