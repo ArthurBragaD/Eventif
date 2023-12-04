@@ -27,11 +27,11 @@ class TestDoTemplateDoEmail(TestCase):
         self.assertEqual(expect, self.email.subject)
     #Quem envia
     def testContatoQuemEnvia(self):
-        expect = 'contato@eventif.com.br'
+        expect = 'TestDoTemplate@gmail.com'
         self.assertEqual(expect, self.email.from_email)
     #Para Quem
     def testContatoQuemRecebe(self):
-        expect = ['contato@eventif.com.br', 'TestDoTemplate@gmail.com']
+        expect = ['TestDoTemplate@gmail.com', 'contato@eventif.com.br']
         self.assertEqual(expect, self.email.to)
 
 class MailTestContatoCompleto(TestCase):

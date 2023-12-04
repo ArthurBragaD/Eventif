@@ -1,5 +1,5 @@
 from django.test import TestCase
-from contact.forms import contatoForm
+from contact.forms import ContactForm
 
 class contactGet(TestCase):
     def setUp(self):
