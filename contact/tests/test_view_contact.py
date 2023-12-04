@@ -3,7 +3,7 @@ from contact.forms import contatoForm
 
 class contactGet(TestCase):
     def setUp(self):
-        self.response = self.client.get('/contatoView/')
+        self.response = self.client.get('/contato/')
 # 
     def test_get(self):
         #Teste para ver se o link esta ok

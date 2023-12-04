@@ -17,7 +17,7 @@ def contato(request):
         
         # Teste se é valido 
         if not form.is_valid():
-            # Retorna a pág contatoView com os erros
+            # Retorna a pág contato com os erros
             return render(request, 'contact/contact_form.html', {'form': form})
 
         # Informações do email
@@ -29,9 +29,9 @@ def contato(request):
         # Envia o email
         mail.send_mail(titulo, corpoDoEmail, emailEnvia, [emailEnvia, emailRecebe])
 
-        # Retorna a pag contatoView com uma mensagem de sucesso de contato 
+        # Retorna a pag contato com uma mensagem de sucesso de contato 
         messages.success(request, 'Contato redirecionado ao staff com sucesso!')
-        return HttpResponseRedirect('/contatoView/')
+        return HttpResponseRedirect('/contato/')
 
 
 
