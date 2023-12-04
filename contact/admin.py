@@ -20,7 +20,7 @@ class ContactModelAdmin(admin.ModelAdmin):
 
     def responder(self, request, queryset):
         for contact in queryset:
-            resposta = "Mensagem foi marcada como respondida"
+            resposta = queryset.update(response="Mensagem foi marcada como respondida")
             nome = contact.name
             emailEnvia = settings.DEFAULT_FROM_EMAIL
             # if (contact.phone == ""):
@@ -34,10 +34,9 @@ class ContactModelAdmin(admin.ModelAdmin):
                 corpoDoEmail,
                 emailEnvia,
                 emailRecebe,
-                resposta,
                 telefone,
+                resposta
             )
-            queryset.update(response=True)
         self.message_user(request, f'{queryset.count()} contato(s) foi(ram) respondido(s) com sucesso.')
 
     responder.short_description = 'Enviar resposta para contatos selecionados'
